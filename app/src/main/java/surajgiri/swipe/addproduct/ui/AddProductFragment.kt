@@ -1,60 +1,65 @@
 package surajgiri.swipe.addproduct.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import surajgiri.swipe.R
+import androidx.fragment.app.Fragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import surajgiri.core.data.response.ApiResponse
+import surajgiri.swipe.addproduct.viewmodel.AddProductViewModel
+import surajgiri.swipe.databinding.FragmentAddProductBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddProductFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddProductFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val viewModel: AddProductViewModel by viewModel()
+
+    //Fragment Binding
+    private var _binding: FragmentAddProductBinding? = null
+
+    private val binding get() = _binding
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_product, container, false)
+        _binding = FragmentAddProductBinding.inflate(inflater, container, false)
+        return binding?.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddProductFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddProductFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Observing the addProductResponse LiveData
+        viewModel.addProductResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is ApiResponse.Loading -> {
+                    // Handle loading state
+                    Log.i("AddProduct", "Loading")
+
+                }
+                is ApiResponse.Success -> {
+                    // Handle success state
+                    val data = response.data
+                    Log.i("AddProduct", "Sucess: $data")
+                }
+                is ApiResponse.Error -> {
+                    // Handle error state
+                    val errorMessage = response.message
+                    Log.i("AddProduct", "Error: $errorMessage")
+
                 }
             }
+        }
+
     }
+
 }

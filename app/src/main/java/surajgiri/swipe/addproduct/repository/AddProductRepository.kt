@@ -1,9 +1,9 @@
 package surajgiri.swipe.addproduct.repository
 
 import okhttp3.MultipartBody
+import retrofit2.Response
 import surajgiri.core.data.api.ApiService
 import surajgiri.core.model.AddProductResponse
-import surajgiri.core.data.response.ApiResponse
 
 class AddProductRepository(
     private val apiService: ApiService
@@ -14,7 +14,7 @@ class AddProductRepository(
         price: String,
         tax: String,
         image: MultipartBody.Part?
-    ): ApiResponse<AddProductResponse> {
+    ): Response<AddProductResponse> {
         return apiService.addProduct(productName, productType, price, tax, image)
     }
 }

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import surajgiri.core.model.AddProductResponse
 import surajgiri.core.data.response.ApiResponse
+import surajgiri.core.model.AddProductResponse
 import surajgiri.swipe.addproduct.repository.AddProductRepository
 
 class AddProductViewModel(
@@ -24,10 +24,18 @@ class AddProductViewModel(
         tax: String,
         image: MultipartBody.Part?
     ) {
+        _addProductResponse.value = ApiResponse.Loading
         viewModelScope.launch {
-            _addProductResponse.value = ApiResponse.Loading
-            val response = addProductRepository.addProduct(productName, productType, price, tax, image)
-            _addProductResponse.value = response
+            try {
+                val response = addProductRepository.addProduct(productName, productType, price, tax, image)
+                if (response.isSuccessful) {
+                    _addProductResponse.value = ApiResponse.Success(response.body()!!)
+                } else {
+                    _addProductResponse.value = ApiResponse.Error(response.message())
+                }
+            } catch (e: Exception) {
+                _addProductResponse.value = ApiResponse.Error(e.localizedMessage ?: "An error occurred")
+            }
         }
     }
 }
