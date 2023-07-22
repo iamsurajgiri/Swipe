@@ -11,6 +11,9 @@ This is an Android app made for Swipe Interview screening, It consists of two sc
   <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-18-59_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=0e46a59b-0ca1-4397-8df1-b8ce22d33f1d" alt="Add Product Screen" width="30%" />
 </div>
 
+## Video Demo
+[![Swipe Products Demo](hhttps://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-14-25_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=81ea156d-0989-4fce-8730-43f00be5eeaf)](https://www.youtube.com/shorts/k2DgoeoyNEw)
+
 ## Technologies Used
 
 The app leverages modern technologies and follows best practices to ensure efficiency and maintainability. The major tech used in this project are:
