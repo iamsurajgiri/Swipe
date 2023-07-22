@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import surajgiri.core.data.repository.AddProductRepository
 import surajgiri.core.data.response.ProductResponse
 import surajgiri.core.model.AddProductResponse
+import java.io.File
 
 class AddProductViewModel(
     private val addProductRepository: AddProductRepository
@@ -22,7 +22,7 @@ class AddProductViewModel(
         productType: String,
         price: String,
         tax: String,
-        image: MultipartBody.Part?
+        image: File?
     ) {
         _addProductResponse.value = ProductResponse.Loading
         viewModelScope.launch {

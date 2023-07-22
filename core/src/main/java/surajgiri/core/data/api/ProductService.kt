@@ -1,6 +1,7 @@
 package surajgiri.core.data.api
 
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import surajgiri.core.model.AddProductResponse
@@ -12,10 +13,10 @@ interface ProductService {
     @Multipart
     @POST("public/add")
     suspend fun addProduct(
-        @Part("product_name") productName: String,
-        @Part("product_type") productType: String,
-        @Part("price") price: String,
-        @Part("tax") tax: String,
+        @Part("product_name") productName: RequestBody,
+        @Part("product_type") productType: RequestBody,
+        @Part("price") price: RequestBody,
+        @Part("tax") tax: RequestBody,
         @Part image: MultipartBody.Part?
     ): Response<AddProductResponse>
 }

@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import surajgiri.core.data.response.ProductResponse
 import surajgiri.swipe.R
@@ -46,7 +44,7 @@ class AddProductFragment : Fragment() {
 
     private val binding get() = _binding
 
-    private var imageBody: MultipartBody.Part? = null
+    private var image: File? = null
 
     //product type
     private var productType: String? = null
@@ -63,6 +61,8 @@ class AddProductFragment : Fragment() {
                 if (checkRequiredImagePermission().not()) {
                     bringImagePicker()
                 }else{
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.addImage?.isEnabled = true
                     Toast.makeText(mContext, "Permission not granted", Toast.LENGTH_SHORT).show()
                 }
 
@@ -71,12 +71,14 @@ class AddProductFragment : Fragment() {
             binding?.addImage?.setImageURI(uri)
             if (uri != null && mContext != null) {
                 lifecycleScope.launch {
-                    val image =
+                    image =
                         File(getRealPathFromUri(uri))
-                    val requestImage = image.asRequestBody("image/*".toMediaTypeOrNull())
-                    imageBody = MultipartBody.Part.createFormData("files[]", image.name, requestImage)
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.addImage?.isEnabled = true
                 }
             } else {
+                binding?.progressBar?.visibility = View.GONE
+                binding?.addImage?.isEnabled = true
                 Toast.makeText(mContext, "Couldn't pick image", Toast.LENGTH_SHORT).show()
             }
         }
@@ -89,14 +91,15 @@ class AddProductFragment : Fragment() {
                 val uri = it.data?.data
                 if (uri != null) {
                     binding?.addImage?.setImageURI(uri)
-                    val image =
+                    image =
                         File(getRealPathFromUri(uri))
-                    val requestImage = image.asRequestBody("image/*".toMediaTypeOrNull())
-                    imageBody = MultipartBody.Part.createFormData("files[]", image.name, requestImage)
-
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.addImage?.isEnabled = true
                 } else {
                     Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_LONG)
                         .show()
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.addImage?.isEnabled = true
                 }
 
             }
@@ -136,14 +139,21 @@ class AddProductFragment : Fragment() {
         viewModel.addProductResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ProductResponse.Loading -> {
+                    binding?.progressBar?.visibility = View.VISIBLE
+                    binding?.addImage?.isEnabled = true
 
                 }
                 is ProductResponse.Success -> {
                     val data = response.data
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.addImage?.isEnabled = true
 
                 }
                 is ProductResponse.Error -> {
                     val errorMessage = response.message
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.addImage?.isEnabled = true
+                    binding?.progressText?.text = errorMessage
 
                 }
             }
@@ -169,10 +179,13 @@ class AddProductFragment : Fragment() {
             }
         }
         binding?.addImage?.setOnClickListener {
+            binding?.addImage?.isEnabled = false
+            binding?.progressBar?.visibility = View.VISIBLE
             bringImagePicker()
         }
 
         binding?.btnAddProduct?.setOnClickListener {
+            binding?.progressBar?.visibility = View.VISIBLE
             addProduct()
         }
 
@@ -188,7 +201,8 @@ class AddProductFragment : Fragment() {
             Toast.makeText(mContext, "Please fill all the fields", Toast.LENGTH_SHORT).show()
             return
         }
-        viewModel.addProduct(productName, productType!!, price, tax, imageBody)
+        viewModel.addProduct(productName, productType!!, price, tax, image)
+        Log.i("PRODUCTS", "addProduct: $productName $productType $price $tax $image")
     }
 
     private fun bringImagePicker() {
