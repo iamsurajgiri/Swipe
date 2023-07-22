@@ -3,6 +3,11 @@
 
 This is an Android app made for Swipe Interview screening, It consists of two screens - a product listing screen and an add product screen. The app allows users to view a list of products, search for products, and add new products to the list. It follows the MVVM architecture, utilizes Retrofit for REST API calls, KOIN for Dependency Injection, and Lifecycle for Kotlin coroutines. Additionally, the app implements Navigation Component from Jetpack to navigate between fragments.
 
+## Screenshots
+![Product Listing Screen](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-14-25_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=81ea156d-0989-4fce-8730-43f00be5eeaf)
+![Product Search](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-32-89_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=ab99b06c-c5a5-4010-8861-e3769f0c0aaf)
+![Add Product Screen](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-18-59_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=0e46a59b-0ca1-4397-8df1-b8ce22d33f1d)
+
 ## Technologies Used
 
 The app leverages modern technologies and follows best practices to ensure efficiency and maintainability. The major tech used in this project are:
