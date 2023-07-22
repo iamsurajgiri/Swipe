@@ -6,7 +6,7 @@ import retrofit2.http.*
 import surajgiri.core.model.AddProductResponse
 import surajgiri.core.model.ListProductResponse
 
-interface ApiService {
+interface ProductService {
     @GET("public/get")
     suspend fun getProducts(): Response<ListProductResponse>
     @Multipart

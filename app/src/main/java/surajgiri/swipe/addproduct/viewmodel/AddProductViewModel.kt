@@ -6,16 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import surajgiri.core.data.response.ApiResponse
+import surajgiri.core.data.repository.AddProductRepository
+import surajgiri.core.data.response.ProductResponse
 import surajgiri.core.model.AddProductResponse
-import surajgiri.swipe.addproduct.repository.AddProductRepository
 
 class AddProductViewModel(
     private val addProductRepository: AddProductRepository
 ) : ViewModel() {
 
-    private val _addProductResponse = MutableLiveData<ApiResponse<AddProductResponse>>()
-    val addProductResponse: LiveData<ApiResponse<AddProductResponse>> = _addProductResponse
+    private val _addProductResponse = MutableLiveData<ProductResponse<AddProductResponse>>()
+    val addProductResponse: LiveData<ProductResponse<AddProductResponse>> = _addProductResponse
 
     fun addProduct(
         productName: String,
@@ -24,17 +24,17 @@ class AddProductViewModel(
         tax: String,
         image: MultipartBody.Part?
     ) {
-        _addProductResponse.value = ApiResponse.Loading
+        _addProductResponse.value = ProductResponse.Loading
         viewModelScope.launch {
             try {
                 val response = addProductRepository.addProduct(productName, productType, price, tax, image)
                 if (response.isSuccessful) {
-                    _addProductResponse.value = ApiResponse.Success(response.body()!!)
+                    _addProductResponse.value = ProductResponse.Success(response.body()!!)
                 } else {
-                    _addProductResponse.value = ApiResponse.Error(response.message())
+                    _addProductResponse.value = ProductResponse.Error(response.message())
                 }
             } catch (e: Exception) {
-                _addProductResponse.value = ApiResponse.Error(e.localizedMessage ?: "An error occurred")
+                _addProductResponse.value = ProductResponse.Error(e.localizedMessage ?: "An error occurred")
             }
         }
     }

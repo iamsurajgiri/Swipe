@@ -1,13 +1,13 @@
-package surajgiri.swipe.listproduct.repository
+package surajgiri.core.data.repository
 
 import retrofit2.Response
-import surajgiri.core.data.api.ApiService
+import surajgiri.core.data.api.ProductService
 import surajgiri.core.model.ListProductResponse
 
 class ListProductRepository(
-    private val apiService: ApiService
+    private val productService: ProductService
 ) {
     suspend fun getProducts(): Response<ListProductResponse> {
-        return apiService.getProducts()
+        return productService.getProducts()
     }
 }

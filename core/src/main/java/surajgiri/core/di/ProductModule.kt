@@ -7,10 +7,12 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import surajgiri.core.Constants.BASE_URL
-import surajgiri.core.data.api.ApiService
+import surajgiri.core.data.api.ProductService
+import surajgiri.core.data.repository.AddProductRepository
+import surajgiri.core.data.repository.ListProductRepository
 
 
-val networkModule = module {
+val productModule = module {
     val gson = GsonBuilder().setLenient().create()
 
     single {
@@ -30,5 +32,8 @@ val networkModule = module {
             .build()
     }
 
-    single { get<Retrofit>().create(ApiService::class.java) }
+    single { get<Retrofit>().create(ProductService::class.java) }
+
+    single { ListProductRepository(get()) }
+    single { AddProductRepository(get()) }
 }

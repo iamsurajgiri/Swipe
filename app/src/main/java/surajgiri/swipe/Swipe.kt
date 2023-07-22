@@ -3,7 +3,7 @@ package surajgiri.swipe
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import surajgiri.core.di.networkModule
+import surajgiri.core.di.productModule
 import surajgiri.swipe.di.appModule
 
 class Swipe : Application() {
@@ -12,7 +12,7 @@ class Swipe : Application() {
 
         startKoin {
             androidContext(this@Swipe)
-            modules(listOf(appModule,networkModule))
+            modules(listOf(appModule,productModule))
         }
     }
 }
