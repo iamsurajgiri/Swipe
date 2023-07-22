@@ -23,7 +23,7 @@ The app has been thoroughly tested to ensure its functionality and stability in 
 
 You can download the APK of the app using the following link:
 
-[APK Download Link](https://drive.google.com/file/d/1mZeIM0og50hirr0m5KCA1bqIIEGE1-HP/view?usp=drive_link)
+[APK Download Link](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/suraj-giri-swipe.apk?alt=media&token=da956f85-69af-40a0-af02-1d6de1624569)
 
 Please make sure to enable installation from unknown sources in your device settings to install the APK.
 
