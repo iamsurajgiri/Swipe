@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import surajgiri.core.model.Product
 import surajgiri.swipe.R
@@ -11,10 +13,29 @@ import surajgiri.swipe.databinding.ProductItemsBinding
 import surajgiri.swipe.utils.loadUrl
 
 class ProductAdapter(
-    private val products: List<Product>,
     private val context: Context
 ) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+
+    private val diffUtilCallback = object
+        : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(
+            oldItem: Product,
+            newItem: Product
+        ): Boolean {
+            return oldItem.image == newItem.image
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Product,
+            newItem: Product
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val productDiffer = AsyncListDiffer(this, diffUtilCallback)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = ProductItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,12 +43,12 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = products[position]
+        val product = productDiffer.currentList[position]
         holder.bind(product)
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return productDiffer.currentList.size
     }
 
     inner class ProductViewHolder(private val binding: ProductItemsBinding) :

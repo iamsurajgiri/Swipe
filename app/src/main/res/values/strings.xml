@@ -14,4 +14,5 @@
     <string name="product_tax">Add Tax</string>
     <string name="product_name">Add Product Name</string>
     <string name="back"><![CDATA[<< Back]]></string>
+    <string name="search_hint">Search products</string>
 </resources>

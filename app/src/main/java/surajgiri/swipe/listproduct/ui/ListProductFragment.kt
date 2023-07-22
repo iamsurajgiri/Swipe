@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -60,7 +61,8 @@ class ListProductFragment : Fragment() {
 
                 is ProductResponse.Success -> {
                     products = response.data
-                    adapter = ProductAdapter(products, mContext!!)
+                    adapter = ProductAdapter(mContext!!)
+                    adapter.productDiffer.submitList(products)
                     binding?.rvProducts?.adapter = adapter
                     binding?.progressBar?.visibility = View.GONE
                     binding?.btnAddProduct?.visibility = View.VISIBLE
@@ -76,20 +78,39 @@ class ListProductFragment : Fragment() {
 
         viewModel.getProducts()
 
+
+        binding?.etSearch?.addTextChangedListener {
+            val searchString = it.toString()
+            filterProductList(searchString)
+        }
+
         binding?.btnAddProduct?.setOnClickListener {
             findNavController().navigate(R.id.action_listProductFragment_to_addProductFragment)
         }
+
     }
 
-    //update the list when the fragment is resumed will be a good practice, so that the list is updated when the user comes back to this fragment
-    //since the api provides the latest fixed list with no pagination possibilities, we can just call the api again
-    override fun onResume() {
-        super.onResume()
-        viewModel.getProducts()
+    private fun filterProductList(searchString: String) {
+        val filteredList = products.filter { product ->
+            product.product_name.lowercase().contains(searchString.lowercase())
+        }
+        adapter.productDiffer.submitList(filteredList)
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
+
+    //update the list when the fragment is resumed will be a good practice, so that the list is updated when the user comes back to this fragment
+    //since the api is public and provides the latest fixed list with no pagination possibilities, we can just call the api again
+    //will fix it if it was a private api to avoid unnecessary api calls for cost saving and data usage
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProducts()
+    }
+
+
+
 }
