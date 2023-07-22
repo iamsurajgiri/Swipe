@@ -12,7 +12,7 @@ This is an Android app made for Swipe Interview screening, It consists of two sc
 </div>
 
 ## Video Demo
-[![Swipe Products Demo](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-14-25_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=81ea156d-0989-4fce-8730-43f00be5eeaf)](https://www.youtube.com/shorts/k2DgoeoyNEw)
+[![Swipe Products Demo]](https://www.youtube.com/shorts/k2DgoeoyNEw)
 
 ## Technologies Used
 
