@@ -6,13 +6,13 @@ This is an Android app made for Swipe Interview screening, It consists of two sc
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap;">
-  <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-14-25_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=81ea156d-0989-4fce-8730-43f00be5eeaf" alt="Product Listing Screen" width="30%" />
-  <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-32-89_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=ab99b06c-c5a5-4010-8861-e3769f0c0aaf" alt="Product Search" width="30%" />
-  <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_2023-07-22-22-56-18-59_be9863c48606fc333644e63e82c5e1b5.jpg?alt=media&token=0e46a59b-0ca1-4397-8df1-b8ce22d33f1d" alt="Add Product Screen" width="30%" />
+  <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_20230723_033557.png?alt=media&token=776bb58d-9411-45d7-b353-f90071534855" alt="Product Listing Screen" width="30%" />
+  <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_20230723_033639.png?alt=media&token=0931e8be-2fe9-44bc-a848-6ee1ee2f0a37" alt="Product Search" width="30%" />
+  <img src="https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2FScreenshot_20230723_033658.png?alt=media&token=3079ff61-ae4b-4c7d-b2d9-066f3bd824fa" alt="Add Product Screen" width="30%" />
 </div>
 
 ## Video Demo
-[Swipe Products Demo](https://www.youtube.com/shorts/k2DgoeoyNEw)
+[Swipe Products Demo](https://www.youtube.com/shorts/Z_8PxZwRzTw)
 
 ## Technologies Used
 
@@ -34,7 +34,7 @@ The app has been thoroughly tested to ensure its functionality and stability in 
 
 You can download the APK of the app using the following link:
 
-[APK Download Link](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/suraj-giri-swipe.apk?alt=media&token=da956f85-69af-40a0-af02-1d6de1624569)
+[APK Download Link](https://firebasestorage.googleapis.com/v0/b/storagebucket-a235c.appspot.com/o/Swipe%2Fapk%2Fsuraj-giri-swipe.apk?alt=media&token=12de888d-56da-4344-ac59-b9b8c24bb06f)
 
 Please make sure to enable installation from unknown sources in your device settings to install the APK.
 
