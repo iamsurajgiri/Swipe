@@ -19,15 +19,18 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import surajgiri.core.data.response.ProductResponse
 import surajgiri.swipe.R
 import surajgiri.swipe.addproduct.viewmodel.AddProductViewModel
 import surajgiri.swipe.databinding.FragmentAddProductBinding
+import surajgiri.swipe.utils.pxToDp
 import java.io.File
 
 class AddProductFragment : Fragment() {
@@ -68,13 +71,16 @@ class AddProductFragment : Fragment() {
 
             }
         selectImageIntent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            binding?.addImage?.setImageURI(uri)
             if (uri != null && mContext != null) {
                 lifecycleScope.launch {
                     image =
                         File(getRealPathFromUri(uri))
                     binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
+                    binding?.addImage?.apply {
+                        setPadding(0,0,0,0)
+                        setImageURI(uri)
+                    }
                 }
             } else {
                 binding?.progressBar?.visibility = View.GONE
@@ -90,11 +96,14 @@ class AddProductFragment : Fragment() {
             } else {
                 val uri = it.data?.data
                 if (uri != null) {
-                    binding?.addImage?.setImageURI(uri)
                     image =
                         File(getRealPathFromUri(uri))
                     binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
+                    binding?.addImage?.apply {
+                        setPadding(0,0,0,0)
+                        setImageURI(uri)
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_LONG)
                         .show()
@@ -135,7 +144,6 @@ class AddProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observing the addProductResponse LiveData
         viewModel.addProductResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ProductResponse.Loading -> {
@@ -144,9 +152,27 @@ class AddProductFragment : Fragment() {
 
                 }
                 is ProductResponse.Success -> {
-                    val data = response.data
                     binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
+                    binding?.apply {
+                        productName.text?.clear()
+                        productPrice.text?.clear()
+                        productTax.text?.clear()
+                        val padding = 20.pxToDp(mContext)
+                        addImage.setPadding(padding, padding, padding, padding)
+                        addImage.setImageResource(R.drawable.no_photo)
+                        image = null
+                    }
+
+                    val builder = AlertDialog.Builder(requireActivity())
+                    builder.setTitle("Successful")
+                        .setMessage("'${response.data.product_details.product_name}' has been added successfully")
+                        .setCancelable(false)
+                        .setPositiveButton("OK") { _, _ ->
+                            findNavController().popBackStack()
+                        }
+                    val alert = builder.create()
+                    alert.show()
 
                 }
                 is ProductResponse.Error -> {
@@ -159,7 +185,6 @@ class AddProductFragment : Fragment() {
             }
         }
 
-        //Caption Language
         val productTypeAdapter = ArrayAdapter(
             mContext!!,
             R.layout.simple_spinner_text,
@@ -187,6 +212,10 @@ class AddProductFragment : Fragment() {
         binding?.btnAddProduct?.setOnClickListener {
             binding?.progressBar?.visibility = View.VISIBLE
             addProduct()
+        }
+
+        binding?.txtBack?.setOnClickListener{
+            findNavController().popBackStack()
         }
 
     }

@@ -82,6 +82,7 @@ class ListProductFragment : Fragment() {
     }
 
     //update the list when the fragment is resumed will be a good practice, so that the list is updated when the user comes back to this fragment
+    //since the api provides the latest fixed list with no pagination possibilities, we can just call the api again
     override fun onResume() {
         super.onResume()
         viewModel.getProducts()
