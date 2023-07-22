@@ -8,18 +8,22 @@
         android:id="@+id/listProductFragment"
         android:name="surajgiri.swipe.listproduct.ui.ListProductFragment"
         android:label="List Products"
-        tools:layout="@layout/fragment_list_product" />
+        tools:layout="@layout/fragment_list_product" >
+        <action
+            android:id="@+id/action_listProductFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/addProductFragment"
         android:name="surajgiri.swipe.addproduct.ui.AddProductFragment"
         android:label="Add Product"
-        tools:layout="@layout/fragment_add_product" />
-
-    <action
-        android:id="@+id/action_listProductFragment_to_addProductFragment"
-        app:destination="@id/addProductFragment" />
-
-    <!-- Add any other fragments here if needed -->
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            app:popUpToInclusive="true"
+            android:id="@+id/action_addProductFragment_to_listProductFragment"
+            app:destination="@id/listProductFragment" />
+    </fragment>
 
 </navigation>

@@ -169,7 +169,7 @@ class AddProductFragment : Fragment() {
                         .setMessage("'${response.data.product_details.product_name}' has been added successfully")
                         .setCancelable(false)
                         .setPositiveButton("OK") { _, _ ->
-                            findNavController().popBackStack()
+                            findNavController().navigate(R.id.action_addProductFragment_to_listProductFragment)
                         }
                     val alert = builder.create()
                     alert.show()
