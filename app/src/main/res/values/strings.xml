@@ -9,4 +9,8 @@
     <string name="price">₹ %.1f</string>
     <string name="swipe_products">Swipe Products</string>
     <string name="add_product">Add Product</string>
+    <string name="add_image">Add Image</string>
+    <string name="product_price">Add Price</string>
+    <string name="product_tax">Add Tax</string>
+    <string name="product_name">Add Product Name</string>
 </resources>

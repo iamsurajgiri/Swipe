@@ -55,6 +55,7 @@ class ListProductFragment : Fragment() {
             when (response) {
                 is ProductResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
+                    binding?.btnAddProduct?.visibility = View.GONE
                 }
 
                 is ProductResponse.Success -> {
@@ -62,11 +63,13 @@ class ListProductFragment : Fragment() {
                     adapter = ProductAdapter(products, mContext!!)
                     binding?.rvProducts?.adapter = adapter
                     binding?.progressBar?.visibility = View.GONE
+                    binding?.btnAddProduct?.visibility = View.VISIBLE
                 }
 
                 is ProductResponse.Error -> {
                     //todo Show error message
                     binding?.progressBar?.visibility = View.GONE
+
                 }
             }
         }
@@ -76,6 +79,12 @@ class ListProductFragment : Fragment() {
         binding?.btnAddProduct?.setOnClickListener {
             findNavController().navigate(R.id.action_listProductFragment_to_addProductFragment)
         }
+    }
+
+    //update the list when the fragment is resumed will be a good practice, so that the list is updated when the user comes back to this fragment
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProducts()
     }
 
     override fun onAttach(context: Context) {
