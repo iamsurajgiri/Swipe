@@ -2,4 +2,11 @@
     <string name="app_name">Swipe</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_image">Product Image</string>
+
+    <string name="tax">Tax %s%%</string>
+
+    <string name="price">₹ %.1f</string>
+    <string name="swipe_products">Swipe Products</string>
+    <string name="add_product">Add Product</string>
 </resources>
