@@ -64,7 +64,6 @@ class AddProductFragment : Fragment() {
                 if (checkRequiredImagePermission().not()) {
                     bringImagePicker()
                 }else{
-                    binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
                     Toast.makeText(mContext, "Permission not granted", Toast.LENGTH_SHORT).show()
                 }
@@ -75,7 +74,6 @@ class AddProductFragment : Fragment() {
                 lifecycleScope.launch {
                     image =
                         File(getRealPathFromUri(uri))
-                    binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
                     binding?.addImage?.apply {
                         setPadding(0,0,0,0)
@@ -83,7 +81,6 @@ class AddProductFragment : Fragment() {
                     }
                 }
             } else {
-                binding?.progressBar?.visibility = View.GONE
                 binding?.addImage?.isEnabled = true
                 Toast.makeText(mContext, "Couldn't pick image", Toast.LENGTH_SHORT).show()
             }
@@ -98,7 +95,6 @@ class AddProductFragment : Fragment() {
                 if (uri != null) {
                     image =
                         File(getRealPathFromUri(uri))
-                    binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
                     binding?.addImage?.apply {
                         setPadding(0,0,0,0)
@@ -107,7 +103,6 @@ class AddProductFragment : Fragment() {
                 } else {
                     Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_LONG)
                         .show()
-                    binding?.progressBar?.visibility = View.GONE
                     binding?.addImage?.isEnabled = true
                 }
 
@@ -205,7 +200,6 @@ class AddProductFragment : Fragment() {
         }
         binding?.addImage?.setOnClickListener {
             binding?.addImage?.isEnabled = false
-            binding?.progressBar?.visibility = View.VISIBLE
             bringImagePicker()
         }
 
