@@ -58,6 +58,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="4dp"
             android:hint="@string/product_price"
+            app:prefixText="₹"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/materialCardView"
             app:layout_constraintTop_toBottomOf="@+id/productTypeSpinner">
@@ -79,6 +80,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
             android:hint="@string/product_tax"
+            app:suffixText="%"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/materialCardView"
             app:layout_constraintTop_toBottomOf="@+id/tilPrice">
@@ -99,7 +101,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
             android:layout_marginTop="12dp"
             android:hint="@string/product_name"
             app:layout_constraintEnd_toEndOf="parent"

@@ -11,6 +11,8 @@ import surajgiri.core.model.Product
 import surajgiri.swipe.R
 import surajgiri.swipe.databinding.ProductItemsBinding
 import surajgiri.swipe.utils.loadUrl
+import java.text.NumberFormat
+import java.util.Locale
 
 class ProductAdapter(
     private val context: Context
@@ -70,7 +72,14 @@ class ProductAdapter(
                     "%.1f".format(product.tax)
                 }
                 productTax.text = context.getString(R.string.tax, formattedTax)
-                productPrice.text = context.getString(R.string.price, product.price)
+                val format = NumberFormat.getCurrencyInstance(Locale("en", "IN"))
+                if (product.price % 1 == 0.0) {
+                    format.minimumFractionDigits = 0
+                    format.maximumFractionDigits = 0
+                }
+                val formattedPrice = format.format(product.price)
+                productPrice.text = formattedPrice
+
                 productType.text = product.product_type
             }
         }

@@ -84,6 +84,7 @@ class ListProductFragment : Fragment() {
         }
 
         binding?.btnAddProduct?.setOnClickListener {
+            binding?.etSearch?.text?.clear()
             findNavController().navigate(R.id.action_listProductFragment_to_addProductFragment)
         }
     }
