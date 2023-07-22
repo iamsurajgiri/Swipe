@@ -1,5 +1,4 @@
-# Swipe
-# Android App: Product Listing and Adding App
+# Swipe Products
 
 This is an Android app made for Swipe Interview screening, It consists of two screens - a product listing screen and an add product screen. The app allows users to view a list of products, search for products, and add new products to the list. It follows the MVVM architecture, utilizes Retrofit for REST API calls, KOIN for Dependency Injection, and Lifecycle for Kotlin coroutines. Additionally, the app implements Navigation Component from Jetpack to navigate between fragments.
 
