@@ -21,7 +21,6 @@
         android:label="Add Product"
         tools:layout="@layout/fragment_add_product" >
         <action
-            app:popUpToInclusive="true"
             android:id="@+id/action_addProductFragment_to_listProductFragment"
             app:destination="@id/listProductFragment" />
     </fragment>
