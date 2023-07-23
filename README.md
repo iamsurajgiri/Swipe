@@ -3,7 +3,9 @@
 ## Introduction
 This is a multi module Android app made for Swipe Interview screening, It consists of two screens - a product listing screen and an add product screen. The app allows users to view a list of products, search for products, and add new products to the list. It follows the MVVM architecture, utilizes Retrofit for REST API calls, KOIN for Dependency Injection, and Lifecycle for Kotlin coroutines. Additionally, the app implements Navigation Component from Jetpack to navigate between fragments, and has also been segregated into two modules:
 - core: for all its core functionalities such as network service etc.
-- app: for UI related features and app layer tasks.
+- app: for UI and app layer tasks.
+
+It improves the code readability as well as increases the hot build time significantly.
 
 ## Screenshots
 
