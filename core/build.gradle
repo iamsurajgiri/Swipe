@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'surajgiri.network'
+    namespace 'surajgiri.core'
     compileSdk 34
 
     defaultConfig {
@@ -63,6 +63,12 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 
     //kotlin navigation components
-    api 'androidx.navigation:navigation-fragment-ktx:2.6.0'
-    api 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    api 'androidx.navigation:navigation-fragment-ktx:2.7.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.7.0'
+
+    //Firebase
+    api(platform("com.google.firebase:firebase-bom:32.2.2"))
+    api 'com.google.firebase:firebase-analytics-ktx'
+    api 'com.google.firebase:firebase-messaging-ktx'
+
 }

@@ -19,3 +19,5 @@ fun Int.pxToDp(context: Context?):Int = TypedValue.applyDimension(
     this.toFloat(),
     context?.resources?.displayMetrics
 ).toInt()
+
+fun CharSequence?.isNotNullOrNotEmpty(): Boolean = isNullOrEmpty().not()
