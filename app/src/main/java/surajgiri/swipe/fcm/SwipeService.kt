@@ -116,7 +116,7 @@ class SwipeService : FirebaseMessagingService() {
 
                         PublishAnalyticsEvent(
                             AnalyticsEvent(
-                                "swipe_notification_created",
+                                "notification_created",
                                 bundleOf(
                                     FirebaseAnalytics.Param.CONTENT to notificationItem.title
                                 )
@@ -134,7 +134,7 @@ class SwipeService : FirebaseMessagingService() {
             )
             PublishAnalyticsEvent(
                 AnalyticsEvent(
-                    "swipe_notification_created",
+                    "notification_created",
                     bundleOf(
                         FirebaseAnalytics.Param.CONTENT to notificationItem.title
                     )

@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -18,6 +19,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import surajgiri.core.model.AnalyticsEvent
 import surajgiri.swipe.databinding.ActivityMainBinding
 import surajgiri.swipe.utils.PublishAnalyticsEvent
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -27,9 +29,10 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission(),
     ) { isGranted: Boolean ->
         if (isGranted) {
-            Firebase.analytics.setUserProperty("notification","enabled")
+            Firebase.analytics.setUserProperty("notification_status","enabled")
             // FCM SDK (and our app) can post notifications.
         } else {
+            Firebase.analytics.setUserProperty("notification_status","disabled")
             Toast.makeText(this,"You will not receive any notifications",Toast.LENGTH_SHORT)
         }
     }
@@ -52,12 +55,14 @@ class MainActivity : AppCompatActivity() {
         if (notificationTitle!=null){
             PublishAnalyticsEvent(
                 AnalyticsEvent(
-                    "swipe_notification_opened",
+                    "notification_opened",
                     bundleOf(
                         FirebaseAnalytics.Param.CONTENT to notificationTitle
                     )
                 )
             ).publish()
+            val currentTimestamp = Calendar.getInstance().time.time
+            NotificationPreferenceHelper.saveLong(NotificationPreferenceHelper.APP_IN_FOREGROUND,currentTimestamp)
             Toast.makeText(this, "Notification Opened", Toast.LENGTH_SHORT).show()
         }
 
@@ -77,17 +82,16 @@ class MainActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
                 PackageManager.PERMISSION_GRANTED
             ) {
-                Firebase.analytics.setUserProperty("notification","enabled")
-                Toast.makeText(this, "You will receive notifications now.", Toast.LENGTH_SHORT).show()
+                Firebase.analytics.setUserProperty("notification_status","enabled")
             } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-                Firebase.analytics.setUserProperty("notification","disabled")
+                Firebase.analytics.setUserProperty("notification_status","disabled")
                 Toast.makeText(this, "Please allow notification permission!", Toast.LENGTH_SHORT).show()
             } else {
                 // Directly ask for the permission
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }else{
-            Firebase.analytics.setUserProperty("notification","enabled")
+            Firebase.analytics.setUserProperty("notification_status","enabled")
 
         }
     }
